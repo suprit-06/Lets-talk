@@ -8,7 +8,10 @@ async def stream_openai_response(messages: list):
     """
     if settings.AI_PROVIDER == "openai":
         from openai import AsyncOpenAI
-        client = AsyncOpenAI(api_key=settings.OPENAI_API_KEY)
+        client = AsyncOpenAI(
+            api_key=settings.OPENAI_API_KEY,
+            base_url=settings.OPENAI_API_BASE if "localhost" not in settings.OPENAI_API_BASE else None
+        )
         try:
             stream = await client.chat.completions.create(
                 model=settings.OPENAI_MODEL,
