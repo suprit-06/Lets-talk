@@ -3,9 +3,9 @@
   <p><b>A production-ready AI chat interface powered by FastAPI, Groq API, and Bootstrap.</b></p>
   
   <p>
-    <a href="https://github.com/yourusername/lets-talk/stargazers"><img src="https://img.shields.io/github/stars/yourusername/lets-talk?style=flat-square&color=blue" alt="Stars"></a>
-    <a href="https://github.com/yourusername/lets-talk/network/members"><img src="https://img.shields.io/github/forks/yourusername/lets-talk?style=flat-square&color=blue" alt="Forks"></a>
-    <a href="https://github.com/yourusername/lets-talk/issues"><img src="https://img.shields.io/github/issues/yourusername/lets-talk?style=flat-square&color=red" alt="Issues"></a>
+    <img src="https://img.shields.io/badge/Status-Active-success.svg?style=flat-square" alt="Status">
+    <img src="https://img.shields.io/badge/Python-3.10%2B-blue.svg?style=flat-square" alt="Python Version">
+    <img src="https://img.shields.io/badge/FastAPI-Production_Ready-009688.svg?style=flat-square" alt="FastAPI">
     <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" alt="MIT License"></a>
   </p>
 </div>
