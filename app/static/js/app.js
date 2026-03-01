@@ -274,7 +274,7 @@ function appendMessage(role, content) {
     const roleLabel = document.createElement('div');
     roleLabel.className = 'd-flex align-items-center mb-1 gap-2 ' + (isUser ? 'text-white-50 flex-row-reverse' : 'text-body-tertiary');
     roleLabel.style.fontSize = '0.75rem';
-    roleLabel.innerHTML = isUser ? `<img src="https://ui-avatars.com/api/?name=You&background=random&size=24" class="rounded-circle me-1" alt="User Avatar"> You` : `<img src="https://ui-avatars.com/api/?name=Ollama&background=0D8ABC&color=fff&size=24" class="rounded-circle me-1" alt="Ollama Avatar"> Assistant`;
+    roleLabel.innerHTML = isUser ? `<img src="https://ui-avatars.com/api/?name=You&background=random&size=24" class="rounded-circle me-1" alt="User Avatar"> You` : `<img src="https://ui-avatars.com/api/?name=AI&background=0D8ABC&color=fff&size=24" class="rounded-circle me-1" alt="AI Avatar"> Assistant`;
 
     const textDiv = document.createElement('div');
     textDiv.className = 'message-text';
