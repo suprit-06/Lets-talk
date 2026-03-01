@@ -76,7 +76,7 @@ async def send_message_stream(request: Request, session_id: int, message: Messag
     # 4. Stream response and save final async
     async def event_generator():
         full_response = ""
-        async for chunk in ai_service.stream_openai_response(context):
+        async for chunk in ai_service.stream_groq_response(context):
             
             if await request.is_disconnected():
                 break
