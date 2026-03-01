@@ -6,11 +6,14 @@ async def stream_openai_response(messages: list):
     """
     Streams the response from Local Ollama or OpenAI using Server-Sent Events (SSE).
     """
-    if settings.AI_PROVIDER == "openai":
+    # Use OpenAI/Groq flow if provider is set to 'openai' OR using a cloud URL (not localhost)
+    is_cloud_url = settings.OPENAI_API_BASE and "localhost" not in settings.OPENAI_API_BASE and "127.0.0.1" not in settings.OPENAI_API_BASE
+    
+    if settings.AI_PROVIDER == "openai" or is_cloud_url:
         from openai import AsyncOpenAI
         client = AsyncOpenAI(
             api_key=settings.OPENAI_API_KEY,
-            base_url=settings.OPENAI_API_BASE if "localhost" not in settings.OPENAI_API_BASE else None
+            base_url=settings.OPENAI_API_BASE if is_cloud_url else None
         )
         try:
             stream = await client.chat.completions.create(
