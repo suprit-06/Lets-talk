@@ -9,7 +9,7 @@ Railway makes it incredibly easy to deploy FastAPI and PostgreSQL.
 2. Provision a **PostgreSQL** database from the Railway dashboard.
 3. Connect your GitHub repository containing this code.
 4. Add the following **Environment Variables** in the Railway service settings:
-   - `OPENAI_API_KEY`: Your OpenAI key
+   - `GROQ_API_KEY`: Your free Groq API key
    - `SECRET_KEY`: Generate a random secure string
    - `DATABASE_URL`: (Will be automatically provided by Railway, just ensure it uses `postgresql+asyncpg://` instead of `postgresql://`)
 5. Railway will automatically detect the `Dockerfile` and build/deploy your application.
@@ -22,7 +22,7 @@ Railway makes it incredibly easy to deploy FastAPI and PostgreSQL.
 4. Create a new **PostgreSQL** database on Render and note the connection string.
 5. In the Web Service environment variables:
    - Add `DATABASE_URL` (change `postgres://` to `postgresql+asyncpg://`)
-   - Add `OPENAI_API_KEY`
+   - Add `GROQ_API_KEY`
    - Add `SECRET_KEY`
 6. Deploy. Render will build the Docker container and host it.
 
@@ -49,7 +49,7 @@ pip install -r requirements.txt
   ```bash
   docker run --name ai-chat-db -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres
   ```
-- Copy `.env.example` to `.env` and fill in `OPENAI_API_KEY` and the `DATABASE_URL`.
+- Copy `.env.example` to `.env` and fill in `GROQ_API_KEY` and the `DATABASE_URL`.
 
 4. **Initialize Database**:
 ```bash
