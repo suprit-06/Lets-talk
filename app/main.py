@@ -8,7 +8,17 @@ from fastapi.responses import HTMLResponse
 from fastapi import Request
 from app.routes import auth, chat
 
-app = FastAPI(title="Let's Talk", version="1.0.0")
+from contextlib import asynccontextmanager
+from app.database import Base, engine
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Initialize database tables on startup
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+    yield
+
+app = FastAPI(title="Let's Talk", version="1.0.0", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,

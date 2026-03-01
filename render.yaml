@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: lets-talk-backend
+    env: docker
+    plan: free
+    region: ohio
+    dockerContext: .
+    dockerFilePath: ./Dockerfile
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: lets-talk-db
+          property: connectionString
+      - key: AI_PROVIDER
+        value: openai # Change to 'openai' and add key below for production
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_MODEL
+        value: gpt-4o-mini
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ALGORITHM
+        value: HS256
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "1440"
+
+databases:
+  - name: lets-talk-db
+    plan: free
+    region: ohio
