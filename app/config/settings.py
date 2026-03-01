@@ -5,8 +5,11 @@ class Settings(BaseSettings):
     SECRET_KEY: str = "default-insecure-key-change-it"
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 1440
-    OPENAI_API_KEY: str = "your-key-here"
-    OPENAI_MODEL: str = "gpt-4o-mini"
+    # AI Settings
+    AI_PROVIDER: str = "ollama" # "ollama" or "openai"
+    OPENAI_API_BASE: str = "http://localhost:11434"
+    OPENAI_API_KEY: str = "your-api-key"
+    OPENAI_MODEL: str = "llama3"
     
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 

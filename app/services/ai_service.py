@@ -4,13 +4,28 @@ from app.config.settings import settings
 
 async def stream_openai_response(messages: list):
     """
-    Streams the response from Local Ollama using Server-Sent Events (SSE).
-    Expected messages format: [{"role": "user", "content": "..."}, ...]
+    Streams the response from Local Ollama or OpenAI using Server-Sent Events (SSE).
     """
-    ollama_url = f"{settings.OPENAI_API_BASE.rstrip('/')}/api/generate" if hasattr(settings, 'OPENAI_API_BASE') and settings.OPENAI_API_BASE else "http://localhost:11434/api/generate"
-    model_name = settings.OPENAI_MODEL if settings.OPENAI_MODEL else "llama3"
+    if settings.AI_PROVIDER == "openai":
+        from openai import AsyncOpenAI
+        client = AsyncOpenAI(api_key=settings.OPENAI_API_KEY)
+        try:
+            stream = await client.chat.completions.create(
+                model=settings.OPENAI_MODEL,
+                messages=messages,
+                stream=True
+            )
+            async for chunk in stream:
+                if chunk.choices and chunk.choices[0].delta.content is not None:
+                    yield chunk.choices[0].delta.content
+        except Exception as e:
+            yield f"[ERROR] OpenAI Error: {str(e)}"
+        return
+
+    # Default to Ollama
+    ollama_url = f"{settings.OPENAI_API_BASE.rstrip('/')}/api/generate"
+    model_name = settings.OPENAI_MODEL
     
-    # Re-build prompt manually for generic generate endpoint instead of Chat structure
     prompt = ""
     for msg in messages:
         if msg["role"] == "system":
@@ -41,6 +56,6 @@ async def stream_openai_response(messages: list):
                         except json.JSONDecodeError:
                             continue
     except httpx.ConnectError:
-        yield "[ERROR] Failed to connect to Ollama. Make sure the Ollama app is running locally (http://localhost:11434)."
+        yield f"[ERROR] Failed to connect to Ollama at {ollama_url}. Make sure Ollama is running."
     except Exception as e:
-        yield f"[ERROR] Failed to fetch response: {str(e)}"
+        yield f"[ERROR] Ollama Error: {str(e)}"
