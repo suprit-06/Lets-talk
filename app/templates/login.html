@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Let's Talk{% endblock %}
+
+{% block content %}
+<div class="d-flex align-items-center justify-content-center h-100">
+    <div class="card shadow-sm" style="width: 100%; max-width: 400px;">
+        <div class="card-body p-4">
+            <h3 class="card-title text-center mb-4">Welcome Back</h3>
+            <form id="login-form">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" required>
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100" id="login-btn">
+                    <span class="spinner-border spinner-border-sm d-none" id="login-spinner" role="status"
+                        aria-hidden="true"></span>
+                    Sign In
+                </button>
+            </form>
+            <div class="text-center mt-3">
+                <small>Don't have an account? <a href="/register" class="text-decoration-none">Sign up</a></small>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

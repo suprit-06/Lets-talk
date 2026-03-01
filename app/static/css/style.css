@@ -1,0 +1,85 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.chat-container {
+    padding-bottom: 2rem;
+}
+
+.chat-message {
+    max-width: 85%;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    position: relative;
+    word-break: break-word;
+}
+
+.chat-message.user {
+    background-color: var(--bs-primary);
+    color: var(--bs-white);
+    align-self: flex-end;
+    margin-left: auto;
+    border-bottom-right-radius: 0.25rem;
+}
+
+.chat-message.assistant {
+    background-color: var(--bs-secondary-bg);
+    color: var(--bs-body-color);
+    align-self: flex-start;
+    margin-right: auto;
+    border-bottom-left-radius: 0.25rem;
+}
+
+.welcome-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.chat-list-item {
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.chat-list-item:hover {
+    background-color: var(--bs-tertiary-bg);
+}
+
+.chat-list-item.active {
+    background-color: var(--bs-tertiary-bg);
+    border-left: 3px solid var(--bs-primary) !important;
+}
+
+.message-input {
+    resize: none;
+}
+
+/* markdown styles inside assistant bubbles */
+.chat-message.assistant p:last-child {
+    margin-bottom: 0;
+}
+.chat-message.assistant pre {
+    background-color: var(--bs-tertiary-bg);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+}
+.chat-message.assistant code {
+    color: var(--bs-pink-text);
+}
+
+.custom-sidebar {
+    width: 260px;
+}
+@media (max-width: 767.98px) {
+    .custom-sidebar {
+        width: 300px;
+    }
+}
