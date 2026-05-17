@@ -3,9 +3,9 @@ from sqlalchemy.future import select
 from fastapi import HTTPException, status
 from app.models.user import User
 from app.schemas.auth import UserCreate
-from app.utils.security import get_password_hash, verify_password, create_access_token
+from app.core.security import get_password_hash, verify_password, create_access_token
 from datetime import timedelta
-from app.config.settings import settings
+from app.core.config import settings
 
 async def register_user(db: AsyncSession, user_data: UserCreate):
     # Check if username or email exists

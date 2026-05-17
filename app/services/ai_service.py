@@ -1,5 +1,5 @@
 from groq import AsyncGroq
-from app.config.settings import settings
+from app.core.config import settings
 
 async def stream_groq_response(messages: list):
     """

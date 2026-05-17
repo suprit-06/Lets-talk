@@ -15,16 +15,6 @@ Railway makes it incredibly easy to deploy FastAPI and PostgreSQL.
 5. Railway will automatically detect the `Dockerfile` and build/deploy your application.
 6. To run database migrations, you can add a start command: `python -m app.init_db && uvicorn app.main:app --host 0.0.0.0 --port $PORT`
 
-### 2. Render Deployment
-1. Go to Render.com and create a **New Web Service**.
-2. Connect your GitHub repository.
-3. Set the Environment to **Docker**.
-4. Create a new **PostgreSQL** database on Render and note the connection string.
-5. In the Web Service environment variables:
-   - Add `DATABASE_URL` (change `postgres://` to `postgresql+asyncpg://`)
-   - Add `GROQ_API_KEY`
-   - Add `SECRET_KEY`
-6. Deploy. Render will build the Docker container and host it.
 
 ---
 

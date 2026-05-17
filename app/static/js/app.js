@@ -228,6 +228,11 @@ async function loadChatHistory(sessionId, title) {
     currentSessionId = sessionId;
     document.getElementById('mobile-chat-title').textContent = title;
     const container = document.getElementById('chat-messages');
+    
+    // Cache welcome screen HTML before container is cleared
+    const welcomeEl = document.getElementById('welcome-screen');
+    const welcomeHTML = welcomeEl ? welcomeEl.outerHTML : '';
+
     container.innerHTML = '<div class="text-center my-4"><div class="spinner-border text-primary"></div></div>';
 
     // Highlight list
@@ -242,7 +247,13 @@ async function loadChatHistory(sessionId, title) {
 
         container.innerHTML = '';
         if (session.messages.length === 0) {
-            container.innerHTML = document.getElementById('welcome-screen').outerHTML; // Preserve design
+            container.innerHTML = welcomeHTML || `
+                <div class="h-100 d-flex flex-column align-items-center justify-content-center text-center text-muted welcome-screen" id="welcome-screen">
+                    <i class="bi bi-robot display-1 text-primary mb-3"></i>
+                    <h2 class="fw-bold text-body-emphasis">How can I help you today?</h2>
+                    <p class="lead">Select a chat from the sidebar or type a message to start a new one.</p>
+                </div>
+            `;
             return;
         }
 
@@ -250,6 +261,7 @@ async function loadChatHistory(sessionId, title) {
         scrollToBottom();
         loadChatSessions(); // refresh active state visually
     } catch (err) {
+        console.error('Error loading chat history:', err);
         container.innerHTML = '<div class="text-center text-danger my-4">Failed to load history.</div>';
     }
 }
